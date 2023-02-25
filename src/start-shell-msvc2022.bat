@@ -2,6 +2,13 @@
 
 SETLOCAL ENABLEEXTENSIONS ENABLEDELAYEDEXPANSION
 
+REM Prevent VSCMD from sending telemetry.
+SET VSCMD_SKIP_SENDTELEMETRY=1
+REM Recent updates to the MSVS 2022 build tools add the location
+REM of the VC++ Toolset to PATH and will not be detected if we
+REM reset to a "clean" path.
+SET MOZ_NO_RESET_PATH=1
+
 IF DEFINED MOZ_MSVCVERSION (
   IF NOT DEFINED VCDIR (
     REM Find the latest Visual Studio's installation directory.
@@ -46,14 +53,14 @@ IF DEFINED MOZ_MSVCVERSION (
   IF NOT DEFINED SDKDIR (
       SET SDKDIR=!UniversalCRTSdkDir!
       SET SDKVER=!UCRTVersion!
-
-      REM Bail if no Windows SDK is found.
-      IF NOT EXIST "!SDKDIR!" (
-        SET ERROR=No Windows SDK found. Exiting.
-        GOTO _QUIT
-      )
   )
 
+  REM Bail if no Windows SDK is found.
+  IF NOT EXIST "!SDKDIR!" (
+    SET ERROR=No Windows SDK found. Exiting.
+    GOTO _QUIT
+  )
+  
   REM Add the DIA SDK paths needed for dump_syms.
   SET INCLUDE=!VSDIR!\DIA SDK\include;!INCLUDE!
   IF "%MOZ_MSVCBITS%" == "32" (
