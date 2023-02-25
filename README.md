@@ -5,18 +5,19 @@ Since MozillaBuild 3.x no longer has any `msvc*`-specific batch files, I've writ
 ## Installation
 
 Simply copy the files inside the `/src` directory into where you've installed MozillaBuild 3.x, and launch the batch file for your environment:
-- `start-shell-msvc2017p-x64.bat` (64-bit build)
-- `start-shell-msvc2017p-x86.bat` (32-bit build)
+- `start-shell-msvc2022-x64.bat` (64-bit build)
+- `start-shell-msvc2022-x86.bat` (32-bit build)
 
 ## Configuration
 
 The following can now be used for specifying the location of the Visual C++ redist in your `.mozconfig`.
 - `$VCINSTALLDIR`
+- `$VCTOOLSREDISTDIR` (MSVC++ Redistributable directory)
 - `$SDKDIR` (Windows SDK directory)
 - `$SDKVER` (Windows SDK latest installed version)
 
 Example:
 ```
-WIN32_REDIST_DIR="$VCINSTALLDIR/Redist/MSVC/14.32.31326/$_BUILD_ARCH/Microsoft.VC143.CRT"
+WIN32_REDIST_DIR="$VCTOOLSREDISTDIR/$_BUILD_ARCH/Microsoft.VC143.CRT"
 WIN_UCRT_REDIST_DIR="$SDKDIR/Redist/$SDKVER/ucrt/DLLs/$_BUILD_ARCH"
 ```
