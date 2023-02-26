@@ -1,4 +1,4 @@
-# UXP Build Utilities
+# MSVC Build Tools for UXP
 
 Since MozillaBuild 3.x no longer has any `msvc*`-specific batch files, I've written a few batch files that target Visual Studio 2017 and higher (primarily tested with VS 2022). Aside from launching the appropriate VS environment, this also populates some essential variables, such as the location of the Windows SDK.
 
